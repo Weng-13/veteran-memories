@@ -65,10 +65,26 @@ img{cursor:zoom-in}
 .family-reply{min-height:3.5em;margin:14px 0 0!important;padding:12px;background:#fffaf0;border-radius:10px;color:#344b38;font-weight:600}
 .family-reply[hidden]{display:none}
 
+
+/* 日期与天气：轻量显示，不加载地图或持续定位 */
+.daily-info{margin:0 14px 22px;padding:16px 18px;background:#fdfaf2;border:1px solid #e1d8c6;border-radius:14px;color:#354238;box-shadow:0 2px 8px rgba(65,55,35,.04)}
+.today-date{font-size:17px;color:#5c6559;margin-bottom:8px;font-weight:600}
+.weather-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:18px;line-height:1.7}
+.weather-temp{font-size:27px;font-weight:750;color:#344b38;letter-spacing:-.5px}
+.weather-detail{font-size:16px;color:#596457}
+.weather-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}
+.weather-location{border:1px solid #aab39f;background:#f4f1e7;color:#344b38;border-radius:9px;padding:7px 12px;font-size:15px;min-height:40px}
+.weather-status{font-size:14px;color:#697365}
+@media(max-width:420px){.daily-info{padding:14px 15px}.weather-line{gap:7px}.weather-temp{font-size:25px}}
 </style></head><body><header class="hero"><div class="wrap"><div class="eyebrow">老兵记忆 · 第一期</div><h1>边境岁月</h1>
 <figure class="hero-cover"><img src="https://media.vietnamplus.vn/images/7255a701687d11cb8c6bbc58a6c80785a8344a77fd45fc8510060ce3e3bcb4d59c29d42a68b2cbcc19860813d58fa87e783410c055b22b38e4d81450530fcfe5/bien_gioi_phia_bac_3.jpg" alt="1979年2月谅山方向409高地战斗历史影像"><figcaption>封面影像｜1979年2月20日，谅山方向409高地战斗。来源：VietnamPlus／越通社。</figcaption></figure><p>有些岁月离我们很远，有些记忆却一直留在亲历者心里。今天，翻开几页旧影像，看看边境线上那些真实的人与日子。</p><div class="issue">第一期　｜　边境岁月：从影像里回望 1979—1987</div></div></header>
 <div class="book-top"><a href="./index.html">← 返回目录</a><strong>第一期 · 边境岁月</strong></div>
-<div class="zoom-hint">阅读小提示：双指张开放大文字和页面，双指合拢缩小；点任意照片可单独放大查看。</div><section class="grandpa-greeting"><strong><span class="daily-greeting">爷爷，早上好！</span></strong><p>新的一天，愿您身体舒坦、心情愉快。这份小周刊，是家里人特意为您准备的。我们挑了照片、找了故事，想陪您一起慢慢翻看。您不用着急，喜欢哪一页就多看一会儿。</p></section>
+<div class="zoom-hint">阅读小提示：双指张开放大文字和页面，双指合拢缩小；点任意照片可单独放大查看。</div><section class="grandpa-greeting"><strong><span class="daily-greeting">爷爷，早上好！</span></strong><p>新的一天，愿您身体舒坦、心情愉快。这份小周刊，是家里人特意为您准备的。我们挑了照片、找了故事，想陪您一起慢慢翻看。您不用着急，喜欢哪一页就多看一会儿。</p></section><section class="daily-info" aria-label="今日日期与天气">
+  <div class="today-date">今天日期：正在读取…</div>
+  <div class="weather-line"><span aria-hidden="true">🌤️</span><strong class="weather-place">广州</strong><span class="weather-temp">--°C</span><span class="weather-detail">天气读取中…</span></div>
+  <div class="weather-line"><span class="weather-detail">今日高低温：--° / --°</span></div>
+  <div class="weather-actions"><button type="button" class="weather-location">查看我所在位置天气</button><span class="weather-status" aria-live="polite">默认显示广东广州天气</span></div>
+</section>
 <main class="wrap"><section class="intro">这是一组关于历史影像的阅读札记。1979年的边境战争，与1984年以后老山方向的轮战，是不同阶段的历史。本期按原始报道区分时间与出处，不推断家中长辈具体参加过哪一阶段。</section><section class="cards">
 <article class="card"><figure><img class="photo" src="https://media.vietnamplus.vn/images/7255a701687d11cb8c6bbc58a6c80785a8344a77fd45fc8510060ce3e3bcb4d59c29d42a68b2cbcc19860813d58fa87e783410c055b22b38e4d81450530fcfe5/bien_gioi_phia_bac_3.jpg" alt="1979年2月20日越南通讯社记录的谅山409高地战斗影像" loading="lazy"><figcaption class="source" style="padding:10px 16px;margin:0">1979年2月20日，谅山方向409高地战斗。图源：VietnamPlus／越通社；请结合原报道图注阅读。</figcaption></figure><div class="content"><div class="tag">01 / 1979年 · 前线记录</div><h2>照片留下现场，也留下摄影者的名字</h2><p>这张照片由越通社资料经 VietnamPlus 发布，原始图注记录的是1979年2月20日谅山方向的战斗。它呈现的是越方部队在战场上的一幕。不同来源对同一场战争有不同叙述，保留原图注，正是尊重史料的一部分。</p><div class="source">原始专题：<a href="https://vietnam.vnanet.vn/chinese/printpsa/1979%E5%B9%B42%E6%9C%88%E8%B6%8A%E4%B8%AD%E8%BE%B9%E5%A2%83%E6%88%98%E4%BA%89%E7%9A%84%E5%9B%BE%E7%89%87-285188.html">越南画报／越通社：1979年2月越中边境战争的图片</a>；<a href="https://zh.vietnamplus.vn/article-post91617.vnp">VietnamPlus 图片专题</a>。</div></div></article>
 <article class="card"><figure><img class="photo" src="https://g.cpanet.org.cn/uploads/202310/16/1697441699614443.jpg" alt="1986年10月云南老山前线，战士们抢救转运伤员，柳军摄" loading="lazy"><figcaption class="source" style="padding:10px 16px;margin:0">1986年10月，云南老山前线。柳军 摄。图片来源：中国摄影家协会网。</figcaption></figure><div class="content"><div class="tag">02 / 1986年 · 前沿救护</div><h2>在枪炮声中，把战友带回来</h2><p>这张照片记录了老山前线战士在复杂地形中转运伤员的紧张瞬间。镜头里没有宏大的战场全景，只有战友之间紧紧抓住彼此的手。对亲历者来说，这样的瞬间往往比口号更难忘。</p><div class="source">摄影：柳军。原始图注及同系列影像：<a href="https://www.cpanet.org.cn/detail_picdetail_136256.html">中国摄影家协会网《柳军：我是一个兵·老山高地》</a>。</div></div></article>
@@ -126,6 +142,57 @@ img{cursor:zoom-in}
       reply.hidden=false;
       index++;
       btn.textContent='再听一句家里的话';
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var dateEl=document.querySelector('.today-date');
+  var dateText=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'long',day:'numeric',weekday:'long'}).format(new Date());
+  if(dateEl)dateEl.textContent='今天是：'+dateText;
+  var cards=document.querySelectorAll('.daily-info');
+  if(!cards.length)return;
+  var codeText=function(code){
+    if(code===0)return '晴'; if(code===1)return '大致晴朗'; if(code===2)return '局部多云'; if(code===3)return '阴天';
+    if([45,48].includes(code))return '有雾'; if([51,53,55,56,57].includes(code))return '毛毛雨';
+    if([61,63,65,66,67,80,81,82].includes(code))return '有雨'; if([71,73,75,77,85,86].includes(code))return '有雪';
+    if([95,96,99].includes(code))return '雷雨'; return '天气变化';
+  };
+  function render(data,place){
+    var current=data.current||{},daily=data.daily||{};
+    var condition=codeText(Number(current.weather_code));
+    cards.forEach(function(card){
+      card.querySelector('.weather-place').textContent=place;
+      card.querySelector('.weather-temp').textContent=Math.round(current.temperature_2m)+'°C';
+      card.querySelector('.weather-detail').textContent=condition+' · 体感 '+Math.round(current.apparent_temperature)+'°C';
+      var range=card.querySelectorAll('.weather-line')[1].querySelector('.weather-detail');
+      range.textContent='今日最高 '+Math.round(daily.temperature_2m_max[0])+'°C · 最低 '+Math.round(daily.temperature_2m_min[0])+'°C';
+    });
+  }
+  function loadWeather(lat,lon,place,cacheKey){
+    cards.forEach(function(card){card.querySelector('.weather-status').textContent='正在获取天气…';});
+    var url='https://api.open-meteo.com/v1/forecast?latitude='+encodeURIComponent(lat)+'&longitude='+encodeURIComponent(lon)+'&current=temperature_2m,apparent_temperature,weather_code&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto';
+    fetch(url).then(function(response){if(!response.ok)throw new Error('weather');return response.json();}).then(function(data){
+      render(data,place);
+      cards.forEach(function(card){card.querySelector('.weather-status').textContent='天气信息仅供日常参考 · 数据来源 Open-Meteo';});
+      if(cacheKey){try{localStorage.setItem(cacheKey,JSON.stringify({time:Date.now(),data:data}));}catch(e){}}
+    }).catch(function(){cards.forEach(function(card){card.querySelector('.weather-status').textContent='天气暂时无法读取，请稍后再试；日期显示正常。';card.querySelector('.weather-detail').textContent='天气信息暂不可用';});});
+  }
+  var cacheKey='veteranWeatherGuangzhou';
+  var cached=null;
+  try{cached=JSON.parse(localStorage.getItem(cacheKey)||'null');}catch(e){}
+  if(cached&&cached.time&&Date.now()-cached.time<30*60*1000){render(cached.data,'广东广州');cards.forEach(function(card){card.querySelector('.weather-status').textContent='广州天气 · 半小时内缓存 · Open-Meteo';});}
+  else{loadWeather(23.1291,113.2644,'广东广州',cacheKey);}
+  cards.forEach(function(card){
+    var button=card.querySelector('.weather-location');
+    button.addEventListener('click',function(){
+      if(!navigator.geolocation){card.querySelector('.weather-status').textContent='当前浏览器不支持定位，继续显示广州天气。';return;}
+      card.querySelector('.weather-status').textContent='请在手机弹窗中允许定位；不会持续追踪位置。';
+      navigator.geolocation.getCurrentPosition(function(position){
+        loadWeather(position.coords.latitude,position.coords.longitude,'当前位置附近',null);
+      },function(){card.querySelector('.weather-status').textContent='未取得定位权限或定位失败，仍可查看广州天气。';},{enableHighAccuracy:false,timeout:8000,maximumAge:30*60*1000});
     });
   });
 })();
