@@ -37,6 +37,12 @@ img{cursor:zoom-in}
 .photo-viewer .viewer-tip{position:absolute;top:max(17px,env(safe-area-inset-top));left:12px;color:#f7f3e8;font-size:14px}
 @media(prefers-reduced-motion:no-preference){.photo-viewer{transition:opacity .15s ease}}
 
+
+/* 每期封面：进入页面后先用历史照片辨认主题 */
+.hero-cover{margin:18px 0 18px;max-width:100%;border:1px solid rgba(255,255,255,.42);border-radius:13px;overflow:hidden;background:rgba(255,255,255,.10);box-shadow:0 5px 18px rgba(0,0,0,.16)}
+.hero-cover img{display:block;width:100%;height:clamp(170px,48vw,300px);object-fit:cover;object-position:center;background:#d8d2c5;cursor:zoom-in}
+.hero-cover figcaption{padding:9px 12px 10px;font-size:14px;line-height:1.65;color:#f5f0e3;background:rgba(20,34,25,.48)}
+@media(max-width:420px){.hero-cover{margin:15px 0}.hero-cover img{height:190px}.hero-cover figcaption{font-size:13px}}
 </style>
 </head>
 <body>
@@ -44,6 +50,7 @@ img{cursor:zoom-in}
 <header class="hero"><div class="wrap">
 <div class="eyebrow">老兵记忆 · 第三期</div>
 <h1>青春有你，战友情长</h1>
+<figure class="hero-cover"><img src="https://jsnews.jschina.com.cn/lyg/a/201708/W020170829440744470471.jpg" alt="1979年春广西战前训练时57名年轻战士合影"><figcaption>封面影像｜1979年春，广西战前训练地57位年轻战士合影。照片由参战老兵陈开保存；来源：中国江苏网。</figcaption></figure>
 <p>那些年，我们一起穿过军装。谨以这组真实影像，致敬1979年前后那一代年轻军人。</p>
 </div></header>
 <div class="zoom-hint">阅读小提示：双指张开放大文字和页面，双指合拢缩小；点任意照片可单独放大查看。</div>
@@ -102,7 +109,7 @@ img{cursor:zoom-in}
   if(!viewer||!large||!close)return;
   function hide(){viewer.classList.remove('open');large.removeAttribute('src');document.body.style.overflow='';}
   document.addEventListener('click',function(e){
-    var img=e.target.closest('main img, figure img, article img, .card img');
+    var img=e.target.closest('main img, figure img, article img, .card img, .hero-cover img');
     if(!img||viewer.contains(img))return;
     e.preventDefault();
     large.src=img.currentSrc||img.src;
