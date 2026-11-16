@@ -65,7 +65,7 @@ img{cursor:zoom-in}
 .weather-detail{font-size:16px;color:#596457}
 .weather-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}
 .weather-location{border:1px solid #aab39f;background:#f4f1e7;color:#344b38;border-radius:9px;padding:7px 12px;font-size:15px;min-height:40px}
-.weather-status{font-size:14px;color:#697365}
+.weather-status{font-size:14px;color:#697365}.weather-credit{color:#52694f;text-decoration:underline}
 @media(max-width:420px){.daily-info{padding:14px 15px}.weather-line{gap:7px}.weather-temp{font-size:25px}}
 </style>
 </head>
@@ -81,7 +81,7 @@ img{cursor:zoom-in}
   <div class="today-date">今天日期：正在读取…</div>
   <div class="weather-line"><span aria-hidden="true">🌤️</span><strong class="weather-place">广州</strong><span class="weather-temp">--°C</span><span class="weather-detail">天气读取中…</span></div>
   <div class="weather-line"><span class="weather-detail">今日高低温：--° / --°</span></div>
-  <div class="weather-actions"><button type="button" class="weather-location">查看我所在位置天气</button><span class="weather-status" aria-live="polite">默认显示广东广州天气</span></div>
+  <div class="weather-actions"><button type="button" class="weather-location">查看我所在位置天气</button><span class="weather-status" aria-live="polite">默认显示广东广州天气</span></div><div class="weather-status">天气数据来源：<a class="weather-credit" href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>（CC BY 4.0）</div>
 </section>
 <main class="wrap">
 <section class="intro">
