@@ -34,8 +34,21 @@ body{background:#f5f1e7;color:#252b25;font-size:19px;line-height:1.95}
 .book-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;background:#e8e4d8;color:#39463a;font-size:16px}
 .book-top a{color:#314f35;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:380px){.book-nav{gap:6px;padding-left:8px;padding-right:8px}.book-nav a,.book-nav span{font-size:15px;min-height:52px}}
+
+/* 手机端长辈阅读：保留浏览器双指等比缩放，并提供单张照片查看 */
+html{touch-action:pan-x pan-y pinch-zoom}
+.zoom-hint{margin:8px 14px 16px;padding:10px 14px;background:#eae6d9;border-radius:10px;color:#405044;font-size:15px;line-height:1.7;text-align:center}
+img{cursor:zoom-in}
+.photo-viewer{position:fixed;inset:0;z-index:9999;background:rgba(15,20,16,.97);display:none;align-items:center;justify-content:center;padding:54px 10px 18px;touch-action:pan-x pan-y pinch-zoom}
+.photo-viewer.open{display:flex}
+.photo-viewer img{display:block;max-width:100%;max-height:calc(100dvh - 76px);width:auto;height:auto;object-fit:contain;background:transparent;cursor:zoom-out}
+.photo-viewer button{position:absolute;top:max(12px,env(safe-area-inset-top));right:14px;min-width:52px;min-height:48px;padding:8px 14px;border:1px solid #d9d5c8;border-radius:12px;background:#f5f1e7;color:#26372e;font-size:18px;font-weight:700}
+.photo-viewer .viewer-tip{position:absolute;top:max(17px,env(safe-area-inset-top));left:12px;color:#f7f3e8;font-size:14px}
+@media(prefers-reduced-motion:no-preference){.photo-viewer{transition:opacity .15s ease}}
+
 </style></head><body><header class="hero"><div class="wrap"><div class="eyebrow">一页历史 · 一份记忆</div><h1>老兵记忆</h1><p>有些岁月离我们很远，有些记忆却一直留在亲历者心里。今天，翻开几页旧影像，看看边境线上那些真实的人与日子。</p><div class="issue">第一期　｜　边境岁月：从影像里回望 1979—1987</div></div></header>
 <div class="book-top"><a href="./index.html">← 返回目录</a><strong>第一期 · 边境岁月</strong></div>
+<div class="zoom-hint">阅读小提示：双指张开放大文字和页面，双指合拢缩小；点任意照片可单独放大查看。</div>
 <main class="wrap"><section class="intro">这是一组关于历史影像的阅读札记。1979年的边境战争，与1984年以后老山方向的轮战，是不同阶段的历史。本期按原始报道区分时间与出处，不推断家中长辈具体参加过哪一阶段。</section><section class="cards">
 <article class="card"><figure><img class="photo" src="https://media.vietnamplus.vn/images/7255a701687d11cb8c6bbc58a6c80785a8344a77fd45fc8510060ce3e3bcb4d59c29d42a68b2cbcc19860813d58fa87e783410c055b22b38e4d81450530fcfe5/bien_gioi_phia_bac_3.jpg" alt="1979年2月20日越南通讯社记录的谅山409高地战斗影像" loading="lazy"><figcaption class="source" style="padding:10px 16px;margin:0">1979年2月20日，谅山方向409高地战斗。图源：VietnamPlus／越通社；请结合原报道图注阅读。</figcaption></figure><div class="content"><div class="tag">01 / 1979年 · 前线记录</div><h2>照片留下现场，也留下摄影者的名字</h2><p>这张照片由越通社资料经 VietnamPlus 发布，原始图注记录的是1979年2月20日谅山方向的战斗。它呈现的是越方部队在战场上的一幕。不同来源对同一场战争有不同叙述，保留原图注，正是尊重史料的一部分。</p><div class="source">原始专题：<a href="https://vietnam.vnanet.vn/chinese/printpsa/1979%E5%B9%B42%E6%9C%88%E8%B6%8A%E4%B8%AD%E8%BE%B9%E5%A2%83%E6%88%98%E4%BA%89%E7%9A%84%E5%9B%BE%E7%89%87-285188.html">越南画报／越通社：1979年2月越中边境战争的图片</a>；<a href="https://zh.vietnamplus.vn/article-post91617.vnp">VietnamPlus 图片专题</a>。</div></div></article>
 <article class="card"><figure><img class="photo" src="https://g.cpanet.org.cn/uploads/202310/16/1697441699614443.jpg" alt="1986年10月云南老山前线，战士们抢救转运伤员，柳军摄" loading="lazy"><figcaption class="source" style="padding:10px 16px;margin:0">1986年10月，云南老山前线。柳军 摄。图片来源：中国摄影家协会网。</figcaption></figure><div class="content"><div class="tag">02 / 1986年 · 前沿救护</div><h2>在枪炮声中，把战友带回来</h2><p>这张照片记录了老山前线战士在复杂地形中转运伤员的紧张瞬间。镜头里没有宏大的战场全景，只有战友之间紧紧抓住彼此的手。对亲历者来说，这样的瞬间往往比口号更难忘。</p><div class="source">摄影：柳军。原始图注及同系列影像：<a href="https://www.cpanet.org.cn/detail_picdetail_136256.html">中国摄影家协会网《柳军：我是一个兵·老山高地》</a>。</div></div></article>
@@ -48,4 +61,31 @@ body{background:#f5f1e7;color:#252b25;font-size:19px;line-height:1.95}
 <a href="./index.html">⌂ 返回目录</a>
 <span class="muted" aria-disabled="true">‹ 上一期</span>
 <span class="muted" aria-disabled="true">下一期 ›<br>筹备中</span>
-</nav></body></html>
+</nav>
+<div class="photo-viewer" id="photoViewer" role="dialog" aria-modal="true" aria-label="照片放大查看">
+  <span class="viewer-tip">双指张开放大 · 双指合拢缩小</span>
+  <button type="button" id="closePhotoViewer" aria-label="关闭照片">关闭 ✕</button>
+  <img id="viewerImage" alt="">
+</div>
+<script>
+(function(){
+  var viewer=document.getElementById('photoViewer');
+  var large=document.getElementById('viewerImage');
+  var close=document.getElementById('closePhotoViewer');
+  if(!viewer||!large||!close)return;
+  function hide(){viewer.classList.remove('open');large.removeAttribute('src');document.body.style.overflow='';}
+  document.addEventListener('click',function(e){
+    var img=e.target.closest('main img, figure img, article img, .card img');
+    if(!img||viewer.contains(img))return;
+    e.preventDefault();
+    large.src=img.currentSrc||img.src;
+    large.alt=img.alt||'历史照片';
+    viewer.classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+  close.addEventListener('click',hide);
+  viewer.addEventListener('click',function(e){if(e.target===viewer)hide();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')hide();});
+})();
+</script>
+</body></html>
