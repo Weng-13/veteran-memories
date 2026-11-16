@@ -11,7 +11,7 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
 /* 爷爷的专属周刊：暖心问候与轻互动 */
 .grandpa-greeting{margin:14px 14px 22px;padding:19px 18px;background:#fffaf0;border:1px solid #e2d7c2;border-radius:14px;box-shadow:0 3px 12px rgba(65,55,35,.05);color:#3c473b;font-size:18px;line-height:1.9}
 .grandpa-greeting strong{display:block;font-size:21px;color:#40583f;margin-bottom:5px}
-.grandpa-greeting p{margin:0}
+.grandpa-greeting p{margin:0 0 10px}.greeting-next{margin-top:5px;min-height:42px;padding:7px 14px;border:1px solid #aab39f;border-radius:9px;background:#f5f1e7;color:#40583f;font-size:16px;font-weight:600}
 .family-note{margin:24px 14px 28px;padding:20px 18px;background:#e9e5d8;border:1px solid #d8d0bd;border-radius:14px;text-align:center;color:#39463a;font-size:18px;line-height:1.9}
 .family-note h2{font-size:22px;line-height:1.5;margin:0 0 7px;color:#344b38}
 .family-note p{margin:0 0 12px}
@@ -34,7 +34,7 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
 </style></head><body>
 <header class="hero"><div class="wrap"><div class="eyebrow">一本只属于家人的小书</div><h1>老兵记忆</h1><p>把走过的岁月、珍贵的照片和想说的话，一期一期收进来。愿每次打开，都有一点温暖。</p></div></header>
 <main class="wrap">
-<section class="grandpa-greeting"><strong><span class="daily-greeting">爷爷，早上好！</span></strong><p>新的一天，愿您身体舒坦、心情愉快。这份小周刊，是家里人特意为您准备的。我们挑了照片、找了故事，想陪您一起慢慢翻看。您不用着急，喜欢哪一页就多看一会儿。</p></section><section class="daily-info" aria-label="今日日期与天气">
+<section class="grandpa-greeting"><strong><span class="daily-greeting">爷爷，早上好！</span></strong><p class="daily-greeting-message">今天也不用赶时间，泡一杯喜欢的茶，坐下来慢慢看。家里人惦记着您。</p><button type="button" class="greeting-next">换一段问候</button></section><section class="daily-info" aria-label="今日日期与天气">
   <div class="today-date">今天日期：正在读取…</div>
   <div class="weather-line"><span aria-hidden="true">🌤️</span><strong class="weather-place">广州</strong><span class="weather-temp">--°C</span><span class="weather-detail">天气读取中…</span></div>
   <div class="weather-line"><span class="weather-detail">今日高低温：--° / --°</span></div>
@@ -56,28 +56,85 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
 </a>
 </section>
 <section class="tip"><strong>怎么阅读：</strong><br>点「打开第一期」即可开始阅读。每一期页面底部都有「返回目录」按钮；以后新增内容，也可以从这里直接选择。</section>
-<section class="family-note"><h2>读到这里，给您送上一句家里的问候</h2><p>如果看累了，就歇一歇。轻轻点一下，看看今天家里想对您说什么。</p><button type="button" class="family-greet-button">收下今天的问候</button><p class="family-reply" hidden aria-live="polite"></p></section></main><footer class="foot">《老兵记忆》· 家庭专属纪念册</footer><script>
+<section class="family-note"><h2>读到这里，听一句家里人的话</h2><p>每次点一下，都会换一句不一样的家常问候。看累了就歇一歇，我们不着急。</p><button type="button" class="family-greet-button">收下今天的问候</button><p class="family-reply" hidden aria-live="polite"></p></section></main><footer class="foot">《老兵记忆》· 家庭专属纪念册</footer><script>
 (function(){
-  var h=Number(new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
-  var greeting=h<11?'爷爷，早上好！':h<18?'爷爷，下午好！':'爷爷，晚上好！';
-  document.querySelectorAll('.daily-greeting').forEach(function(el){el.textContent=greeting;});
+  var parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  var p={};parts.forEach(function(x){p[x.type]=x.value;});
+  var seed=Math.floor(Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day))/86400000);
   var messages=[
-    '爷爷，愿您今天吃得香、睡得好，心里有阳光，身边有惦记。',
-    '有空就给我们讲讲以前的故事吧。您经历过的岁月，是家里珍贵的记忆。',
-    '不管今天忙不忙，记得照顾好自己。家里人一直惦记着您，愿您平安顺心。',
-    '照片可以慢慢看，故事可以慢慢讲。我们有的是时间，愿意一直听您说。'
+    "爷爷，今天也记得按时吃饭。家里人盼着您胃口好、精神好。",
+    "哪天想起老战友的名字或故事，就讲给我们听吧，我们帮您把它记下来。",
+    "照片里的年轻人已经白了头发，但当年的情谊不会变。愿您常有老友的消息。",
+    "今天辛苦了，坐下来歇一歇。家里人一直惦记着您。",
+    "您走过的路、见过的人，都是家里珍贵的记忆。谢谢您愿意和我们分享。",
+    "愿您今晚睡得踏实，明天醒来又是轻松的一天。",
+    "看累了就把手机放一放，眼睛休息好了再继续。我们不着急。",
+    "有机会我们一起翻翻旧照片，您来讲故事，我们来做记录。",
+    "爷爷，愿您每天都有一点小欢喜，饭菜香、身体舒坦、心里敞亮。",
+    "如果今天有想吃的东西，就告诉家里人。把日子过得合心意最重要。",
+    "过去的故事值得回味，眼前的日子也值得好好享受。",
+    "愿您和老朋友们都平平安安，有空常联系，常见面。",
+    "这本小册子是家里人一点点整理的，里面每一页都带着对您的惦念。",
+    "别总惦记操心的事，能放下的就放一放，今天先让自己轻松些。",
+    "您讲过的往事，我们会认真听，也会认真记。那是属于您的珍贵岁月。",
+    "今天也给您一个隔空拥抱。愿您心里暖和，身边热闹。",
+    "哪张照片看得久一点都没关系，喜欢的故事可以反复看。",
+    "谢谢您把经历和回忆留给家里。它们会一代一代传下去。",
+    "愿您今天散散步、晒晒太阳，做些让自己舒服的小事。",
+    "有时候一句家常话就够了：爷爷，我们都想着您。",
+    "希望您今天吃得香、睡得好，也有时间做自己喜欢的事。",
+    "如果想起以前的趣事，别一个人乐，讲给我们听，让大家一起开心。",
+    "人生走过风雨，也要享受眼前的安稳。愿您每天都自在。",
+    "不管这一期读到哪儿，都记得：家里人爱听您说话，也爱陪您慢慢变老。"
   ];
-  var index=0;
+  var index=seed%messages.length;
   document.querySelectorAll('.family-greet-button').forEach(function(btn){
+    var reply=btn.parentElement.querySelector('.family-reply');
     btn.addEventListener('click',function(){
-      var reply=btn.parentElement.querySelector('.family-reply');
       reply.textContent=messages[index%messages.length];
       reply.hidden=false;
       index++;
-      btn.textContent='再听一句家里的话';
+      btn.textContent='再换一句家里的话';
     });
   });
-})();
+
+  var h=Number(new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
+  var greeting=h<11?'爷爷，早上好！':h<18?'爷爷，下午好！':'爷爷，晚上好！';
+  document.querySelectorAll('.daily-greeting').forEach(function(el){el.textContent=greeting;});
+  var dailyMessages=[
+    "今天也不用赶时间，泡一杯喜欢的茶，坐下来慢慢看。家里人惦记着您。",
+    "不知道您今天想起了哪位老战友？有空讲给我们听，我们很愿意听。",
+    "日子一天天过，家里的牵挂一直都在。愿今天有阳光，也有好心情。",
+    "今天这几页照片，是我们特意替您挑的。看到熟悉的场景，就多停留一会儿。",
+    "年轻时走过那么多路，如今更要把日子过得从容。今天也记得好好休息。",
+    "如果窗外天气不错，不妨晒晒太阳、活动活动。家里人祝您今天舒舒服服。",
+    "有些故事讲过很多遍，我们还是愿意听。因为那是您亲身走过的岁月。",
+    "今天不安排什么任务，只想请您翻翻照片，想看多久就看多久。",
+    "愿今天的饭菜合口味，屋里暖暖的，心里也亮堂堂的。",
+    "看到老照片时，您会不会想起当年的营房、操场和那群年轻人？",
+    "今天也给自己留一点悠闲时间。书慢慢看，茶慢慢喝，日子慢慢过。",
+    "家里人把这本小册子放在这里，您想起来就打开看看，我们一直惦记您。",
+    "若有哪张照片让您想起往事，记得告诉我们。那些回忆值得被好好保存。",
+    "新的一天，愿您腿脚轻松、胃口好，想做的事情都从从容容。",
+    "今天的问候不讲大道理，只想说一句：爷爷，我们想您了。",
+    "岁月把很多事情带远了，却带不走战友间的情谊。愿您今天想起的都是温暖。",
+    "忙也好，闲也好，都别忘了照顾自己。家里人盼着您每天都舒心。",
+    "今天可以从一张照片开始，慢慢回忆；也可以什么都不想，只享受清闲。",
+    "希望今天有一件小事让您开心：一顿可口的饭、一通电话，或一缕好阳光。",
+    "我们又为您整理了几页内容。您是这本小册子最重要的读者。",
+    "有空给家里讲讲以前的趣事吧，哪怕是很小的一件，我们也爱听。",
+    "愿今天的风不急、阳光正好，您心情平和，身边有人陪伴。",
+    "这本小册子会慢慢添新内容，您也可以慢慢看，不必一次看完。",
+    "爷爷，今天也请您把自己放在心上。舒服、开心，比什么都重要。"
+  ];
+  var dailyIndex=seed%dailyMessages.length;
+  var dailyText=document.querySelector('.daily-greeting-message');
+  function showDaily(){if(dailyText)dailyText.textContent=dailyMessages[dailyIndex%dailyMessages.length];}
+  showDaily();
+  var nextGreeting=document.querySelector('.greeting-next');
+  if(nextGreeting)nextGreeting.addEventListener('click',function(){dailyIndex++;showDaily();});
+
+})();;
 </script>
 <script>
 (function(){
