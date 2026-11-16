@@ -7,10 +7,23 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
 .welcome{padding:25px 22px 12px;color:#384239;font-size:19px;line-height:2}.section-title{font-size:22px;margin:18px 22px 12px;color:#29352b}
 .list{padding:0 14px 30px}.issue{display:block;text-decoration:none;color:inherit;background:#fffdf7;border:1px solid #d8d2c3;border-radius:15px;overflow:hidden;margin:0 0 18px;box-shadow:0 3px 12px rgba(45,49,38,.05)}.issue img{display:block;width:100%;height:clamp(170px,48vw,280px);object-fit:cover;object-position:center;background:#ddd8ca}.issue .body{background:#fffdf7}.issue:focus-visible{outline:4px solid #8b9b78;outline-offset:3px}@media(max-width:420px){.issue img{height:190px}.body{padding:17px 18px 20px}}.body{padding:19px 20px 22px}.number{font-size:16px;color:#526747;font-weight:700;letter-spacing:.05em}.body h2{font-size:24px;line-height:1.5;margin:6px 0 8px;color:#263229}.body p{font-size:18px;line-height:1.9;margin:0;color:#465047}.open{display:inline-block;margin-top:14px;padding:10px 18px;border-radius:10px;background:#344b38;color:#fffdf3;font-size:17px;font-weight:700}
 .soon{background:#ece8dc;border:1px dashed #a8a995;border-radius:15px;padding:20px;margin:0 0 18px;color:#596258}.soon strong{display:block;font-size:21px;color:#39453b;margin-bottom:5px}.soon p{font-size:17px;line-height:1.8;margin:0}.tip{margin:0 14px 28px;background:#e9e5d9;border-left:4px solid #6b7b5e;padding:17px 18px;font-size:17px;line-height:1.9;color:#3d493e}.foot{background:#26372e;color:#ecebdd;text-align:center;padding:20px;font-size:15px}
+
+/* 爷爷的专属周刊：暖心问候与轻互动 */
+.grandpa-greeting{margin:14px 14px 22px;padding:19px 18px;background:#fffaf0;border:1px solid #e2d7c2;border-radius:14px;box-shadow:0 3px 12px rgba(65,55,35,.05);color:#3c473b;font-size:18px;line-height:1.9}
+.grandpa-greeting strong{display:block;font-size:21px;color:#40583f;margin-bottom:5px}
+.grandpa-greeting p{margin:0}
+.family-note{margin:24px 14px 28px;padding:20px 18px;background:#e9e5d8;border:1px solid #d8d0bd;border-radius:14px;text-align:center;color:#39463a;font-size:18px;line-height:1.9}
+.family-note h2{font-size:22px;line-height:1.5;margin:0 0 7px;color:#344b38}
+.family-note p{margin:0 0 12px}
+.family-note button{min-height:50px;padding:10px 20px;border:0;border-radius:12px;background:#344b38;color:#fffdf3;font-size:18px;font-weight:700}
+.family-note button:focus-visible{outline:4px solid #a5b38f;outline-offset:3px}
+.family-reply{min-height:3.5em;margin:14px 0 0!important;padding:12px;background:#fffaf0;border-radius:10px;color:#344b38;font-weight:600}
+.family-reply[hidden]{display:none}
+
 </style></head><body>
 <header class="hero"><div class="wrap"><div class="eyebrow">一本只属于家人的小书</div><h1>老兵记忆</h1><p>把走过的岁月、珍贵的照片和想说的话，一期一期收进来。愿每次打开，都有一点温暖。</p></div></header>
 <main class="wrap">
-<section class="welcome">欢迎来到《老兵记忆》。这里像一本慢慢写成的家庭纪念册。您可以选择想看的那一期，读完后随时回到目录。</section>
+<section class="grandpa-greeting"><strong><span class="daily-greeting">爷爷，早上好！</span></strong><p>新的一天，愿您身体舒坦、心情愉快。这份小周刊，是家里人特意为您准备的。我们挑了照片、找了故事，想陪您一起慢慢翻看。您不用着急，喜欢哪一页就多看一会儿。</p></section>
 <h2 class="section-title">目录 · 已收录</h2>
 <section class="list">
 <a class="issue" href="./issue-01.html">
@@ -27,4 +40,26 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
 </a>
 </section>
 <section class="tip"><strong>怎么阅读：</strong><br>点「打开第一期」即可开始阅读。每一期页面底部都有「返回目录」按钮；以后新增内容，也可以从这里直接选择。</section>
-</main><footer class="foot">《老兵记忆》· 家庭专属纪念册</footer></body></html>
+<section class="family-note"><h2>读到这里，给您送上一句家里的问候</h2><p>如果看累了，就歇一歇。轻轻点一下，看看今天家里想对您说什么。</p><button type="button" class="family-greet-button">收下今天的问候</button><p class="family-reply" hidden aria-live="polite"></p></section></main><footer class="foot">《老兵记忆》· 家庭专属纪念册</footer><script>
+(function(){
+  var h=new Date().getHours();
+  var greeting=h<11?'爷爷，早上好！':h<18?'爷爷，下午好！':'爷爷，晚上好！';
+  document.querySelectorAll('.daily-greeting').forEach(function(el){el.textContent=greeting;});
+  var messages=[
+    '爷爷，愿您今天吃得香、睡得好，心里有阳光，身边有惦记。',
+    '有空就给我们讲讲以前的故事吧。您经历过的岁月，是家里珍贵的记忆。',
+    '不管今天忙不忙，记得照顾好自己。家里人一直惦记着您，愿您平安顺心。',
+    '照片可以慢慢看，故事可以慢慢讲。我们有的是时间，愿意一直听您说。'
+  ];
+  var index=0;
+  document.querySelectorAll('.family-greet-button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var reply=btn.parentElement.querySelector('.family-reply');
+      reply.textContent=messages[index%messages.length];
+      reply.hidden=false;
+      index++;
+      btn.textContent='再听一句家里的话';
+    });
+  });
+})();
+</script></body></html>
