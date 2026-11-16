@@ -109,7 +109,7 @@ img{cursor:zoom-in}
 })();
 
 (function(){
-  var h=new Date().getHours();
+  var h=Number(new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
   var greeting=h<11?'爷爷，早上好！':h<18?'爷爷，下午好！':'爷爷，晚上好！';
   document.querySelectorAll('.daily-greeting').forEach(function(el){el.textContent=greeting;});
   var messages=[
