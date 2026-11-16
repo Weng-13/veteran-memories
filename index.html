@@ -20,10 +20,26 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
 .family-reply{min-height:3.5em;margin:14px 0 0!important;padding:12px;background:#fffaf0;border-radius:10px;color:#344b38;font-weight:600}
 .family-reply[hidden]{display:none}
 
+
+/* 日期与天气：轻量显示，不加载地图或持续定位 */
+.daily-info{margin:0 14px 22px;padding:16px 18px;background:#fdfaf2;border:1px solid #e1d8c6;border-radius:14px;color:#354238;box-shadow:0 2px 8px rgba(65,55,35,.04)}
+.today-date{font-size:17px;color:#5c6559;margin-bottom:8px;font-weight:600}
+.weather-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:18px;line-height:1.7}
+.weather-temp{font-size:27px;font-weight:750;color:#344b38;letter-spacing:-.5px}
+.weather-detail{font-size:16px;color:#596457}
+.weather-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}
+.weather-location{border:1px solid #aab39f;background:#f4f1e7;color:#344b38;border-radius:9px;padding:7px 12px;font-size:15px;min-height:40px}
+.weather-status{font-size:14px;color:#697365}
+@media(max-width:420px){.daily-info{padding:14px 15px}.weather-line{gap:7px}.weather-temp{font-size:25px}}
 </style></head><body>
 <header class="hero"><div class="wrap"><div class="eyebrow">一本只属于家人的小书</div><h1>老兵记忆</h1><p>把走过的岁月、珍贵的照片和想说的话，一期一期收进来。愿每次打开，都有一点温暖。</p></div></header>
 <main class="wrap">
-<section class="grandpa-greeting"><strong><span class="daily-greeting">爷爷，早上好！</span></strong><p>新的一天，愿您身体舒坦、心情愉快。这份小周刊，是家里人特意为您准备的。我们挑了照片、找了故事，想陪您一起慢慢翻看。您不用着急，喜欢哪一页就多看一会儿。</p></section>
+<section class="grandpa-greeting"><strong><span class="daily-greeting">爷爷，早上好！</span></strong><p>新的一天，愿您身体舒坦、心情愉快。这份小周刊，是家里人特意为您准备的。我们挑了照片、找了故事，想陪您一起慢慢翻看。您不用着急，喜欢哪一页就多看一会儿。</p></section><section class="daily-info" aria-label="今日日期与天气">
+  <div class="today-date">今天日期：正在读取…</div>
+  <div class="weather-line"><span aria-hidden="true">🌤️</span><strong class="weather-place">广州</strong><span class="weather-temp">--°C</span><span class="weather-detail">天气读取中…</span></div>
+  <div class="weather-line"><span class="weather-detail">今日高低温：--° / --°</span></div>
+  <div class="weather-actions"><button type="button" class="weather-location">查看我所在位置天气</button><span class="weather-status" aria-live="polite">默认显示广东广州天气</span></div>
+</section>
 <h2 class="section-title">目录 · 已收录</h2>
 <section class="list">
 <a class="issue" href="./issue-01.html">
@@ -62,4 +78,55 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
     });
   });
 })();
-</script></body></html>
+</script>
+<script>
+(function(){
+  var dateEl=document.querySelector('.today-date');
+  var dateText=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'long',day:'numeric',weekday:'long'}).format(new Date());
+  if(dateEl)dateEl.textContent='今天是：'+dateText;
+  var cards=document.querySelectorAll('.daily-info');
+  if(!cards.length)return;
+  var codeText=function(code){
+    if(code===0)return '晴'; if(code===1)return '大致晴朗'; if(code===2)return '局部多云'; if(code===3)return '阴天';
+    if([45,48].includes(code))return '有雾'; if([51,53,55,56,57].includes(code))return '毛毛雨';
+    if([61,63,65,66,67,80,81,82].includes(code))return '有雨'; if([71,73,75,77,85,86].includes(code))return '有雪';
+    if([95,96,99].includes(code))return '雷雨'; return '天气变化';
+  };
+  function render(data,place){
+    var current=data.current||{},daily=data.daily||{};
+    var condition=codeText(Number(current.weather_code));
+    cards.forEach(function(card){
+      card.querySelector('.weather-place').textContent=place;
+      card.querySelector('.weather-temp').textContent=Math.round(current.temperature_2m)+'°C';
+      card.querySelector('.weather-detail').textContent=condition+' · 体感 '+Math.round(current.apparent_temperature)+'°C';
+      var range=card.querySelectorAll('.weather-line')[1].querySelector('.weather-detail');
+      range.textContent='今日最高 '+Math.round(daily.temperature_2m_max[0])+'°C · 最低 '+Math.round(daily.temperature_2m_min[0])+'°C';
+    });
+  }
+  function loadWeather(lat,lon,place,cacheKey){
+    cards.forEach(function(card){card.querySelector('.weather-status').textContent='正在获取天气…';});
+    var url='https://api.open-meteo.com/v1/forecast?latitude='+encodeURIComponent(lat)+'&longitude='+encodeURIComponent(lon)+'&current=temperature_2m,apparent_temperature,weather_code&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto';
+    fetch(url).then(function(response){if(!response.ok)throw new Error('weather');return response.json();}).then(function(data){
+      render(data,place);
+      cards.forEach(function(card){card.querySelector('.weather-status').textContent='天气信息仅供日常参考 · 数据来源 Open-Meteo';});
+      if(cacheKey){try{localStorage.setItem(cacheKey,JSON.stringify({time:Date.now(),data:data}));}catch(e){}}
+    }).catch(function(){cards.forEach(function(card){card.querySelector('.weather-status').textContent='天气暂时无法读取，请稍后再试；日期显示正常。';card.querySelector('.weather-detail').textContent='天气信息暂不可用';});});
+  }
+  var cacheKey='veteranWeatherGuangzhou';
+  var cached=null;
+  try{cached=JSON.parse(localStorage.getItem(cacheKey)||'null');}catch(e){}
+  if(cached&&cached.time&&Date.now()-cached.time<30*60*1000){render(cached.data,'广东广州');cards.forEach(function(card){card.querySelector('.weather-status').textContent='广州天气 · 半小时内缓存 · Open-Meteo';});}
+  else{loadWeather(23.1291,113.2644,'广东广州',cacheKey);}
+  cards.forEach(function(card){
+    var button=card.querySelector('.weather-location');
+    button.addEventListener('click',function(){
+      if(!navigator.geolocation){card.querySelector('.weather-status').textContent='当前浏览器不支持定位，继续显示广州天气。';return;}
+      card.querySelector('.weather-status').textContent='请在手机弹窗中允许定位；不会持续追踪位置。';
+      navigator.geolocation.getCurrentPosition(function(position){
+        loadWeather(position.coords.latitude,position.coords.longitude,'当前位置附近',null);
+      },function(){card.querySelector('.weather-status').textContent='未取得定位权限或定位失败，仍可查看广州天气。';},{enableHighAccuracy:false,timeout:8000,maximumAge:30*60*1000});
+    });
+  });
+})();
+</script>
+</body></html>
