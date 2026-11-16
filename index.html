@@ -42,7 +42,7 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
 <section class="tip"><strong>怎么阅读：</strong><br>点「打开第一期」即可开始阅读。每一期页面底部都有「返回目录」按钮；以后新增内容，也可以从这里直接选择。</section>
 <section class="family-note"><h2>读到这里，给您送上一句家里的问候</h2><p>如果看累了，就歇一歇。轻轻点一下，看看今天家里想对您说什么。</p><button type="button" class="family-greet-button">收下今天的问候</button><p class="family-reply" hidden aria-live="polite"></p></section></main><footer class="foot">《老兵记忆》· 家庭专属纪念册</footer><script>
 (function(){
-  var h=new Date().getHours();
+  var h=Number(new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
   var greeting=h<11?'爷爷，早上好！':h<18?'爷爷，下午好！':'爷爷，晚上好！';
   document.querySelectorAll('.daily-greeting').forEach(function(el){el.textContent=greeting;});
   var messages=[
