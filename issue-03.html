@@ -77,7 +77,7 @@ img{cursor:zoom-in}
 <figure class="hero-cover"><img src="https://jsnews.jschina.com.cn/lyg/a/201708/W020170829440744470471.jpg" alt="1979年春广西战前训练时57名年轻战士合影"><figcaption>封面影像｜1979年春，广西战前训练地57位年轻战士合影。照片由参战老兵陈开保存；来源：中国江苏网。</figcaption></figure>
 <p>那些年，我们一起穿过军装。谨以这组真实影像，致敬1979年前后那一代年轻军人。</p>
 </div></header>
-<div class="zoom-hint">阅读小提示：双指张开放大文字和页面，双指合拢缩小；点任意照片可单独放大查看。</div><section class="grandpa-greeting"><strong><span class="daily-greeting">爷爷，早上好！</span></strong><p>新的一天，愿您身体舒坦、心情愉快。这份小周刊，是家里人特意为您准备的。我们挑了照片、找了故事，想陪您一起慢慢翻看。您不用着急，喜欢哪一页就多看一会儿。</p></section><section class="daily-info" aria-label="今日日期与天气">
+<div class="zoom-hint">阅读小提示：双指张开放大文字和页面，双指合拢缩小；点任意照片可单独放大查看。</div><section class="daily-info" aria-label="今日日期与天气">
   <div class="today-date">今天日期：正在读取…</div>
   <div class="weather-line"><span aria-hidden="true">🌤️</span><strong class="weather-place">广州</strong><span class="weather-temp">--°C</span><span class="weather-detail">天气读取中…</span></div>
   <div class="weather-line"><span class="weather-detail">今日高低温：--° / --°</span></div>
@@ -122,7 +122,7 @@ img{cursor:zoom-in}
 <p>说明：网页为家庭纪念阅读整理，照片版权归原摄影者、原刊及相关权利方所有。未获得商业转载授权，不作商业用途。部分照片年代按原报道和原刊标注；无法确认的具体日期不作推断。</p>
 </section>
 <nav class="nav"><a href="./issue-02.html">← 上一期</a><a href="./index.html">返回目录</a><a href="./index.html">目录首页 →</a></nav>
-<section class="family-note"><h2>读到这里，给您送上一句家里的问候</h2><p>如果看累了，就歇一歇。轻轻点一下，看看今天家里想对您说什么。</p><button type="button" class="family-greet-button">收下今天的问候</button><p class="family-reply" hidden aria-live="polite"></p></section></main>
+<section class="family-note"><h2>读到这里，听一句家里人的话</h2><p>每次点一下，都会换一句不一样的家常问候。看累了就歇一歇，我们不着急。</p><button type="button" class="family-greet-button">收下今天的问候</button><p class="family-reply" hidden aria-live="polite"></p></section></main>
 <footer class="footer">《老兵记忆》· 第三期 · 青春有你，战友情长</footer>
 
 <div class="photo-viewer" id="photoViewer" role="dialog" aria-modal="true" aria-label="照片放大查看">
@@ -152,26 +152,47 @@ img{cursor:zoom-in}
 })();
 
 (function(){
-  var h=Number(new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
-  var greeting=h<11?'爷爷，早上好！':h<18?'爷爷，下午好！':'爷爷，晚上好！';
-  document.querySelectorAll('.daily-greeting').forEach(function(el){el.textContent=greeting;});
+  var parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  var p={};parts.forEach(function(x){p[x.type]=x.value;});
+  var seed=Math.floor(Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day))/86400000);
   var messages=[
-    '爷爷，愿您今天吃得香、睡得好，心里有阳光，身边有惦记。',
-    '有空就给我们讲讲以前的故事吧。您经历过的岁月，是家里珍贵的记忆。',
-    '不管今天忙不忙，记得照顾好自己。家里人一直惦记着您，愿您平安顺心。',
-    '照片可以慢慢看，故事可以慢慢讲。我们有的是时间，愿意一直听您说。'
+    "爷爷，今天也记得按时吃饭。家里人盼着您胃口好、精神好。",
+    "哪天想起老战友的名字或故事，就讲给我们听吧，我们帮您把它记下来。",
+    "照片里的年轻人已经白了头发，但当年的情谊不会变。愿您常有老友的消息。",
+    "今天辛苦了，坐下来歇一歇。家里人一直惦记着您。",
+    "您走过的路、见过的人，都是家里珍贵的记忆。谢谢您愿意和我们分享。",
+    "愿您今晚睡得踏实，明天醒来又是轻松的一天。",
+    "看累了就把手机放一放，眼睛休息好了再继续。我们不着急。",
+    "有机会我们一起翻翻旧照片，您来讲故事，我们来做记录。",
+    "爷爷，愿您每天都有一点小欢喜，饭菜香、身体舒坦、心里敞亮。",
+    "如果今天有想吃的东西，就告诉家里人。把日子过得合心意最重要。",
+    "过去的故事值得回味，眼前的日子也值得好好享受。",
+    "愿您和老朋友们都平平安安，有空常联系，常见面。",
+    "这本小册子是家里人一点点整理的，里面每一页都带着对您的惦念。",
+    "别总惦记操心的事，能放下的就放一放，今天先让自己轻松些。",
+    "您讲过的往事，我们会认真听，也会认真记。那是属于您的珍贵岁月。",
+    "今天也给您一个隔空拥抱。愿您心里暖和，身边热闹。",
+    "哪张照片看得久一点都没关系，喜欢的故事可以反复看。",
+    "谢谢您把经历和回忆留给家里。它们会一代一代传下去。",
+    "愿您今天散散步、晒晒太阳，做些让自己舒服的小事。",
+    "有时候一句家常话就够了：爷爷，我们都想着您。",
+    "希望您今天吃得香、睡得好，也有时间做自己喜欢的事。",
+    "如果想起以前的趣事，别一个人乐，讲给我们听，让大家一起开心。",
+    "人生走过风雨，也要享受眼前的安稳。愿您每天都自在。",
+    "不管这一期读到哪儿，都记得：家里人爱听您说话，也爱陪您慢慢变老。"
   ];
-  var index=0;
+  var index=seed%messages.length;
   document.querySelectorAll('.family-greet-button').forEach(function(btn){
+    var reply=btn.parentElement.querySelector('.family-reply');
     btn.addEventListener('click',function(){
-      var reply=btn.parentElement.querySelector('.family-reply');
       reply.textContent=messages[index%messages.length];
       reply.hidden=false;
       index++;
-      btn.textContent='再听一句家里的话';
+      btn.textContent='再换一句家里的话';
     });
   });
-})();
+
+})();;
 </script>
 
 <script>
