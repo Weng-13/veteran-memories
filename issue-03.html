@@ -43,6 +43,19 @@ img{cursor:zoom-in}
 .hero-cover img{display:block;width:100%;height:clamp(170px,48vw,300px);object-fit:cover;object-position:center;background:#d8d2c5;cursor:zoom-in}
 .hero-cover figcaption{padding:9px 12px 10px;font-size:14px;line-height:1.65;color:#f5f0e3;background:rgba(20,34,25,.48)}
 @media(max-width:420px){.hero-cover{margin:15px 0}.hero-cover img{height:190px}.hero-cover figcaption{font-size:13px}}
+
+/* 爷爷的专属周刊：暖心问候与轻互动 */
+.grandpa-greeting{margin:14px 14px 22px;padding:19px 18px;background:#fffaf0;border:1px solid #e2d7c2;border-radius:14px;box-shadow:0 3px 12px rgba(65,55,35,.05);color:#3c473b;font-size:18px;line-height:1.9}
+.grandpa-greeting strong{display:block;font-size:21px;color:#40583f;margin-bottom:5px}
+.grandpa-greeting p{margin:0}
+.family-note{margin:24px 14px 28px;padding:20px 18px;background:#e9e5d8;border:1px solid #d8d0bd;border-radius:14px;text-align:center;color:#39463a;font-size:18px;line-height:1.9}
+.family-note h2{font-size:22px;line-height:1.5;margin:0 0 7px;color:#344b38}
+.family-note p{margin:0 0 12px}
+.family-note button{min-height:50px;padding:10px 20px;border:0;border-radius:12px;background:#344b38;color:#fffdf3;font-size:18px;font-weight:700}
+.family-note button:focus-visible{outline:4px solid #a5b38f;outline-offset:3px}
+.family-reply{min-height:3.5em;margin:14px 0 0!important;padding:12px;background:#fffaf0;border-radius:10px;color:#344b38;font-weight:600}
+.family-reply[hidden]{display:none}
+
 </style>
 </head>
 <body>
@@ -53,7 +66,7 @@ img{cursor:zoom-in}
 <figure class="hero-cover"><img src="https://jsnews.jschina.com.cn/lyg/a/201708/W020170829440744470471.jpg" alt="1979年春广西战前训练时57名年轻战士合影"><figcaption>封面影像｜1979年春，广西战前训练地57位年轻战士合影。照片由参战老兵陈开保存；来源：中国江苏网。</figcaption></figure>
 <p>那些年，我们一起穿过军装。谨以这组真实影像，致敬1979年前后那一代年轻军人。</p>
 </div></header>
-<div class="zoom-hint">阅读小提示：双指张开放大文字和页面，双指合拢缩小；点任意照片可单独放大查看。</div>
+<div class="zoom-hint">阅读小提示：双指张开放大文字和页面，双指合拢缩小；点任意照片可单独放大查看。</div><section class="grandpa-greeting"><strong><span class="daily-greeting">爷爷，早上好！</span></strong><p>新的一天，愿您身体舒坦、心情愉快。这份小周刊，是家里人特意为您准备的。我们挑了照片、找了故事，想陪您一起慢慢翻看。您不用着急，喜欢哪一页就多看一会儿。</p></section>
 <main class="wrap">
 <section class="intro">
 <p>年轻时的军装，也许只有一两套；一起拍下的合影，却可能保存了一辈子。</p>
@@ -93,7 +106,7 @@ img{cursor:zoom-in}
 <p>说明：网页为家庭纪念阅读整理，照片版权归原摄影者、原刊及相关权利方所有。未获得商业转载授权，不作商业用途。部分照片年代按原报道和原刊标注；无法确认的具体日期不作推断。</p>
 </section>
 <nav class="nav"><a href="./issue-02.html">← 上一期</a><a href="./index.html">返回目录</a><a href="./index.html">目录首页 →</a></nav>
-</main>
+<section class="family-note"><h2>读到这里，给您送上一句家里的问候</h2><p>如果看累了，就歇一歇。轻轻点一下，看看今天家里想对您说什么。</p><button type="button" class="family-greet-button">收下今天的问候</button><p class="family-reply" hidden aria-live="polite"></p></section></main>
 <footer class="footer">《老兵记忆》· 第三期 · 青春有你，战友情长</footer>
 
 <div class="photo-viewer" id="photoViewer" role="dialog" aria-modal="true" aria-label="照片放大查看">
@@ -120,6 +133,28 @@ img{cursor:zoom-in}
   close.addEventListener('click',hide);
   viewer.addEventListener('click',function(e){if(e.target===viewer)hide();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')hide();});
+})();
+
+(function(){
+  var h=new Date().getHours();
+  var greeting=h<11?'爷爷，早上好！':h<18?'爷爷，下午好！':'爷爷，晚上好！';
+  document.querySelectorAll('.daily-greeting').forEach(function(el){el.textContent=greeting;});
+  var messages=[
+    '爷爷，愿您今天吃得香、睡得好，心里有阳光，身边有惦记。',
+    '有空就给我们讲讲以前的故事吧。您经历过的岁月，是家里珍贵的记忆。',
+    '不管今天忙不忙，记得照顾好自己。家里人一直惦记着您，愿您平安顺心。',
+    '照片可以慢慢看，故事可以慢慢讲。我们有的是时间，愿意一直听您说。'
+  ];
+  var index=0;
+  document.querySelectorAll('.family-greet-button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var reply=btn.parentElement.querySelector('.family-reply');
+      reply.textContent=messages[index%messages.length];
+      reply.hidden=false;
+      index++;
+      btn.textContent='再听一句家里的话';
+    });
+  });
 })();
 </script>
 </body></html>
