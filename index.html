@@ -100,7 +100,7 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
     "人生走过风雨，也要享受眼前的安稳。愿您每天都自在。",
     "不管这一期读到哪儿，都记得：家里人爱听您说话，也爱陪您慢慢变老。"
   ];
-  var index=seed%messages.length;
+  var index=Math.floor(Math.random()*messages.length);
   document.querySelectorAll('.family-greet-button').forEach(function(btn){
     var reply=btn.parentElement.querySelector('.family-reply');
     btn.addEventListener('click',function(){
@@ -111,8 +111,10 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
     });
   });
 
-  var h=Number(new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
-  var greeting=h<11?'爷爷，早上好！':h<18?'爷爷，下午好！':'爷爷，晚上好！';
+  var h=Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Shanghai',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
+  if(!Number.isFinite(h))h=Number(new Date().toLocaleString('en-US',{timeZone:'Asia/Shanghai',hour:'numeric',hour12:false}));
+  h=((h%24)+24)%24;
+  var greeting=h>=5&&h<11?'爷爷，早上好！':h>=11&&h<18?'爷爷，下午好！':'爷爷，晚上好！';
   document.querySelectorAll('.daily-greeting').forEach(function(el){el.textContent=greeting;});
   var dailyMessages=[
     "今天也不用赶时间，泡一杯喜欢的茶，坐下来慢慢看。家里人惦记着您。",
@@ -140,7 +142,7 @@ body{margin:0;background:#f5f1e7;color:#283129;font-family:-apple-system,BlinkMa
     "这本小册子会慢慢添新内容，您也可以慢慢看，不必一次看完。",
     "爷爷，今天也请您把自己放在心上。舒服、开心，比什么都重要。"
   ];
-  var dailyIndex=seed%dailyMessages.length;
+  var dailyIndex=Math.floor(Math.random()*dailyMessages.length);
   var dailyText=document.querySelector('.daily-greeting-message');
   function showDaily(){if(dailyText)dailyText.textContent=dailyMessages[dailyIndex%dailyMessages.length];}
   showDaily();
