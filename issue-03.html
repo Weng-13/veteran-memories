@@ -181,7 +181,7 @@ img{cursor:zoom-in}
     "人生走过风雨，也要享受眼前的安稳。愿您每天都自在。",
     "不管这一期读到哪儿，都记得：家里人爱听您说话，也爱陪您慢慢变老。"
   ];
-  var index=seed%messages.length;
+  var index=Math.floor(Math.random()*messages.length);
   document.querySelectorAll('.family-greet-button').forEach(function(btn){
     var reply=btn.parentElement.querySelector('.family-reply');
     btn.addEventListener('click',function(){
